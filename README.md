@@ -28,7 +28,7 @@ The python pre-requisites can be found at requirements.txt file. Just install th
 
 ## How to run
 
-Configure the news and price datasets paths in scripts and run in the following sequence:
+After configure the folderes, news and price datasets paths in scripts, just run them the following sequence:
 
 - data_import.py
 - clean_dates.py
