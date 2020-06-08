@@ -47,9 +47,10 @@ If you think StockNet is useful for your work, please consider citing us.
 @mastersthesis{stocknet2019,
   title={StockNet: A Multivariate Deep Neural Architecture for stock prices prediction},
   author={NASCIMENTO, Janderson Borges},
-  school       = {UFAM},
+  school = {Universidade Federal do Amazonas},
   address     =  {Manaus, Brazil},  
   year         = 2019,  
-  month        = 9
-}
+  month        = 9,
+  url       = {https://tede.ufam.edu.br/handle/tede/7409}
+  }
 ```
