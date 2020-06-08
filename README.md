@@ -40,3 +40,16 @@ After configure the folderes, news and price datasets paths in scripts, just run
 
 - run_experiments.py
 
+## Citing StockNet
+
+If you think StockNet is useful for your work, please consider citing us.
+```BibTeX
+@mastersthesis{mastersthesis,
+  title={StockNet: A Multivariate Deep Neural Architecture for stock prices prediction},
+  author={NASCIMENTO, Janderson Borges},
+  school       = {UFAM},
+  address     =  {Manaus, Brazil},  
+  year         = 2019,  
+  month        = 9
+}
+```
