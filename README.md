@@ -55,6 +55,5 @@ If you think StockNet is useful for your work, please consider citing us.
   url       = {https://tede.ufam.edu.br/handle/tede/7409}
   }
 ```
-}
 
 
