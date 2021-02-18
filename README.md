@@ -44,7 +44,7 @@ After configure the folderes, news and price datasets paths in scripts, just run
 
 If you think StockNet is useful for your work, please consider citing us.
 ```BibTeX
-@mastersthesis{nascimento2019stocknet,
+@article{nascimento2019stocknet,
   title={StockNet: A Multivariate Deep Neural Architecture for stock prices prediction},
   author={NASCIMENTO, Janderson Borges},
   school = {Universidade Federal do Amazonas},
@@ -56,3 +56,5 @@ If you think StockNet is useful for your work, please consider citing us.
   }
 ```
 }
+
+
