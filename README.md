@@ -1,59 +1,85 @@
-# StockNet's Default Implementation
+# StockNet
 
-This repository contains the default partial but functional python's implementation of StockNet.
+**Multivariate stock-price forecasting with temporal convolutions and news-derived features.**
 
-WARNING: Clean code needed (Hard coded references and bad code pratices ahead)
+StockNet explores how causal, dilated convolutional networks can combine historical prices with information extracted from financial news. Developed as part of my MSc research at the Federal University of Amazonas (UFAM), the architecture draws on sequence models used in speech synthesis.
 
-## About StockNet
+[Read the thesis](https://tede.ufam.edu.br/handle/tede/7409) · [Model implementation](models.py) · [Experiment script](run_experiments.py)
 
-StockNet is a novel deep neural architecture to predict stock prices based on Temporal Convolutional Networks and inspired by acoustic models for voice synthesis. 
+## Research approach
 
-For more information about the full implementation and architecture, please check my [master thesis here](https://tede.ufam.edu.br/bitstream/tede/7409/6/Disserta%C3%A7%C3%A3o_JandersonNascimento_PPGI.pdf).
+- Combine closing prices with news-derived sentiment features.
+- Model temporal dependencies using causal, dilated 1D convolutions, residual connections, and skip connections.
+- Compare the multivariate model with a price-only WaveNet-style model and a structured-event baseline implemented with a random forest.
 
-## Dataset
+The public implementation uses the input columns `close`, `pos`, `neg`, `lit`, `unc`, and `con`. See the thesis for the full research methodology and reported results.
 
-The News dataset is the same used in [Ding et al. (2014)](http://emnlp2014.org/papers/pdf/EMNLP2014148.pdf).
+## Model reference
 
-- [Ding et al., 2014] Xiao Ding, Yue Zhang, Ting Liu, and Junwen Duan. Using structured events to predict stock price movement: An empirical investigation. In Proc. of EMNLP, pages 1415–1425, Doha, Qatar, October 2014. Association for Computational Linguistics.
+![WaveNet-style architecture reference](img/wavenet.png)
 
-The fulll Stock Prices dataset is an extensive 30 minute window stock prices dataset including the 10 more liquid stocks extracted from Dow Jones and NASDAQ from January, 2004 to August 2018 and can be requested from the author if you need. You also can use any price timeseries you want in StockNet.
+The figure above provides a WaveNet-style architecture reference. The StockNet implementation is defined in [models.py](models.py).
 
-## Pre-requisites
+## Repository guide
 
-Python Version: 3.7 
+| File | Purpose |
+| --- | --- |
+| `models.py` | StockNet and price-only WaveNet-style models |
+| `data_import.py` | Data import |
+| `clean_dates.py` | Date preprocessing |
+| `break_news_30min.py` | News alignment to 30-minute intervals |
+| `sentiment_extraction.py` | News sentiment extraction |
+| `split_assets.py` | Per-asset data preparation |
+| `oie_extraction.py` | Open information extraction for the structured-event workflow |
+| `merge_price_news.py` | Price and news merging |
+| `run_experiments.py` | Training, prediction, and baseline comparisons |
 
-The python pre-requisites can be found at requirements.txt file. Just install them by:
+## Data
 
-```pip install -r requirements.txt```
+The news corpus follows the dataset used by Ding et al. (2014):
 
-## How to run
+Xiao Ding, Yue Zhang, Ting Liu, and Junwen Duan. *Using structured events to predict stock price movement: An empirical investigation.* EMNLP 2014, pp. 1415–1425.
 
-After configure the folderes, news and price datasets paths in scripts, just run them the following sequence:
+The original price dataset covers ten US stocks at 30-minute intervals from January 2004 to August 2018. The full price dataset is not included in this repository. A news sentiment CSV is included under `dataset/`.
 
-- data_import.py
-- clean_dates.py
-- break_news_30min.py
-- sentiment_extraction.py
-- split_assets.py
-- oie_extraction.py (if using see)
-- merge_price_news_w2v.py
+## Working with the research code
 
-- run_experiments.py
+This is a **partial historical research implementation**, rather than a ready-to-run forecasting package. The original environment used Python 3.7 and legacy TensorFlow APIs.
 
-## Citing StockNet
+1. Inspect [requirements.txt](requirements.txt) and prepare a compatible research environment.
+2. Install dependencies:
 
-If you think StockNet is useful for your work, please consider citing us.
-```BibTeX
-@article{nascimento2019stocknet,
-  title={StockNet: A Multivariate Deep Neural Architecture for stock prices prediction},
-  author={NASCIMENTO, Janderson Borges},
-  school = {Universidade Federal do Amazonas},
-  address     =  {Manaus, Brazil},  
-  year         = 2019,  
-  month        = 9,
-  publisher={Universidade Federal do Amazonas},
-  url       = {https://tede.ufam.edu.br/handle/tede/7409}
-  }
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
+
+3. Configure dataset locations and output directories in the scripts.
+4. Review the preprocessing stages in the repository guide before running experiments.
+
+The experiment script expects prepared per-stock data, including the news features and the `see` column used by the structured-event baseline.
+
+## Reproducibility and limitations
+
+- Dataset paths and experiment settings are hard-coded.
+- The full datasets and trained checkpoints are not bundled.
+- The implementation uses legacy TensorFlow and pandas APIs that need adaptation for current environments.
+- `run_experiments.py` references `rmse_wn_str` while its assignment is commented out; this needs correction before running the script end to end.
+- Results have not been independently rerun as part of this documentation update. Consult the thesis for reported experimental findings.
+
+## Citation
+
+```bibtex
+@mastersthesis{nascimento2019stocknet,
+  title   = {StockNet: A Multivariate Deep Neural Architecture for stock prices prediction},
+  author  = {Nascimento, Janderson Borges},
+  school  = {Universidade Federal do Amazonas},
+  address = {Manaus, Brazil},
+  year    = {2019},
+  month   = {9},
+  url     = {https://tede.ufam.edu.br/handle/tede/7409}
+}
 ```
 
+## License
 
+[MIT](LICENSE).
